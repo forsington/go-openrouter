@@ -8,7 +8,7 @@ import (
 	"io"
 	"net/http"
 
-	utils "github.com/casibase/go-openrouter/internal"
+	utils "github.com/forsington/go-openrouter/internal"
 )
 
 var (

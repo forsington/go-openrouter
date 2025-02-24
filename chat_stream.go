@@ -3,7 +3,8 @@ package openrouter
 import (
 	"bufio"
 	"context"
-	utils "github.com/casibase/go-openrouter/internal"
+
+	utils "github.com/forsington/go-openrouter/internal"
 )
 
 type ChatCompletionStream struct {
