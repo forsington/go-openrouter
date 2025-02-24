@@ -127,3 +127,35 @@ type Model struct {
 	} `json:"top_provider"`
 	PerRequestLimits any `json:"per_request_limits"`
 }
+
+// Chat is a wrapper for chat completion messages with helper methods.
+type Chat []ChatCompletionMessage
+
+func (c *Chat) Add(role, content string) {
+	*c = append(*c, ChatCompletionMessage{Role: role, Content: content})
+}
+
+func (c *Chat) AddUser(content string) {
+	c.Add(ChatMessageRoleUser, content)
+}
+
+func (c *Chat) AddSystem(content string) {
+	c.Add(ChatMessageRoleSystem, content)
+}
+
+func (c *Chat) AddAssistant(content string) {
+	c.Add(ChatMessageRoleAssistant, content)
+}
+
+func (c *Chat) FinalAssistantMessage() string {
+	for i := len(*c) - 1; i >= 0; i-- {
+		if (*c)[i].Role == ChatMessageRoleAssistant {
+			return (*c)[i].Content
+		}
+	}
+	return ""
+}
+
+func NewChat() *Chat {
+	return &Chat{}
+}
