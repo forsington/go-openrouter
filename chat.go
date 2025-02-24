@@ -32,11 +32,6 @@ func (c *Client) CreateChatCompletion(
 	}
 
 	urlSuffix := "/chat/completions"
-	request.Model = wrapperModels[request.Model]
-	if !checkSupportsModel(request.Model) {
-		err = ErrCompletionUnsupportedModel
-		return
-	}
 
 	req, err := c.requestBuilder.Build(ctx, http.MethodPost, c.fullURL(urlSuffix), request)
 	if err != nil {

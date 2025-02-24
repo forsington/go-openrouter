@@ -96,3 +96,34 @@ type Usage struct {
 	CompletionTokens int `json:"completion_tokens"`
 	TotalTokens      int `json:"total_tokens"`
 }
+
+// ListModelsResponse represents a response structure for list models API.
+type ListModelsResponse struct {
+	Models []*Model `json:"data"`
+}
+
+// Model represents a model structure.
+type Model struct {
+	ID            string `json:"id"`
+	Name          string `json:"name"`
+	Created       int    `json:"created"`
+	Description   string `json:"description"`
+	ContextLength int    `json:"context_length"`
+	Architecture  struct {
+		Modality     string `json:"modality"`
+		Tokenizer    string `json:"tokenizer"`
+		InstructType any    `json:"instruct_type"`
+	} `json:"architecture"`
+	Pricing struct {
+		Prompt     string `json:"prompt"`
+		Completion string `json:"completion"`
+		Image      string `json:"image"`
+		Request    string `json:"request"`
+	} `json:"pricing"`
+	TopProvider struct {
+		ContextLength       int  `json:"context_length"`
+		MaxCompletionTokens int  `json:"max_completion_tokens"`
+		IsModerated         bool `json:"is_moderated"`
+	} `json:"top_provider"`
+	PerRequestLimits any `json:"per_request_limits"`
+}
